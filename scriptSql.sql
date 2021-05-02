@@ -7,6 +7,25 @@
 CREATE DATABASE IF NOT EXISTS `db_cv` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `db_cv`;
 
+CREATE TABLE IF NOT EXISTS `asso_competence_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_profile` int(11) DEFAULT NULL,
+  `id_competence` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK2_profile` (`id_profile`),
+  KEY `FK1_comp` (`id_competence`),
+  CONSTRAINT `FK1_comp` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id`),
+  CONSTRAINT `FK2_profile` FOREIGN KEY (`id_profile`) REFERENCES `profile` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+/*!40000 ALTER TABLE `asso_competence_profile` DISABLE KEYS */;
+INSERT INTO `asso_competence_profile` (`id`, `id_profile`, `id_competence`) VALUES
+	(1, 1, 3),
+	(2, 1, 2),
+	(3, 1, 4),
+	(4, 1, 1);
+/*!40000 ALTER TABLE `asso_competence_profile` ENABLE KEYS */;
+
 CREATE TABLE IF NOT EXISTS `asso_expr_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_profile` int(11) DEFAULT NULL,
@@ -40,6 +59,23 @@ INSERT INTO `asso_formation_profile` (`id`, `id_formation`, `id_profile`) VALUES
 	(1, 1, 1),
 	(2, 2, 1);
 /*!40000 ALTER TABLE `asso_formation_profile` ENABLE KEYS */;
+
+CREATE TABLE IF NOT EXISTS `competence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+/*!40000 ALTER TABLE `competence` DISABLE KEYS */;
+INSERT INTO `competence` (`id`, `libelle`) VALUES
+	(1, '  <li class="list-inline-item"><i class="fab fa-html5"></i></li>'),
+	(2, '<li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>'),
+	(3, '<li class="list-inline-item"><i class="fab fa-react"></i></li>'),
+	(4, '<li class="list-inline-item"><i class="fab fa-node-js"></i></li>'),
+	(5, '<li class="list-inline-item"><i class="fab fa-wordpress"></i></li>'),
+	(6, '<li class="list-inline-item"><i class="fab fa-grunt"></i></li>'),
+	(7, '<li class="list-inline-item"><i class="fab fa-npm"></i></li>');
+/*!40000 ALTER TABLE `competence` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `experience` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
